@@ -72,4 +72,4 @@ class Atom(Grammar): # A variable from Grammar G
                 return ast.success(exp)
             return ast.fail(f"{Error.parserError}: Esperando por '{Consts.RPAR}'")
 
-        return ast.fail(f"{Error.parserError}: Esperado por '{Consts.INT}', '{Consts.FLOAT}', '{Consts.ID}', '{Consts.LET}', '{Consts.PLUS}', '{Consts.MINUS}', '{Consts.LPAR}', '{Consts.GRAPH}'")
+        return ast.fail(f"{Error.parserError}: Esperado por '{Consts.INT}', '{Consts.FLOAT}', '{Consts.ID}', '{Consts.LET}', '{Consts.PLUS}', '{Consts.MINUS}', '{Consts.POW}', '{Consts.LPAR}', '{Consts.GRAPH}'")
