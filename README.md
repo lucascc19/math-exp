@@ -81,7 +81,3 @@ UFC> 2^3^2
 ## Contribuições
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
-
-## Licença
-
-[MIT](LICENSE)
