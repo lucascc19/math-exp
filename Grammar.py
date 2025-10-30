@@ -39,14 +39,14 @@ class Term(Grammar): # A variable from Grammar G
 class Factor(Grammar): # A variable from Grammar G
     def Rule(self):
         # <Factor> ::= (PLUS | MINUS)* <Factor> | <Pow>
-        pr = self.GetParserManager()
-        tok = self.CurrentToken()
+        parser_manager = self.GetParserManager()
+        current_token = self.CurrentToken()
         
-        if tok.type in (Consts.PLUS, Consts.MINUS):
+        if current_token.type in (Consts.PLUS, Consts.MINUS):
             self.NextToken()
-            factor = pr.registry(Factor(self.parser).Rule())
-            if pr.error: return pr
-            return pr.success(NoOpUnaria(tok, factor))
+            factor = parser_manager.registry(Factor(self.parser).Rule())
+            if parser_manager.error: return parser_manager
+            return parser_manager.success(NoOpUnaria(current_token, factor))
         
         return Pow(self.parser).Rule() # <Pow>
 
