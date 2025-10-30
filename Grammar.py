@@ -38,7 +38,22 @@ class Term(Grammar): # A variable from Grammar G
 
 class Factor(Grammar): # A variable from Grammar G
     def Rule(self):
-        return Atom(self.parser).Rule() # <Atom>
+        # <Factor> ::= (PLUS | MINUS)* <Factor> | <Pow>
+        pr = self.GetParserManager()
+        tok = self.CurrentToken()
+        
+        if tok.type in (Consts.PLUS, Consts.MINUS):
+            self.NextToken()
+            factor = pr.registry(Factor(self.parser).Rule())
+            if pr.error: return pr
+            return pr.success(NoOpUnaria(tok, factor))
+        
+        return Pow(self.parser).Rule() # <Pow>
+
+class Pow(Grammar): # A variable from Grammar G
+    def Rule(self):
+        # <Pow> ::= <Atom> (POW <Pow>)*
+        return NoOpBinaria.Perform(Atom(self.parser), (Consts.POW,), Pow(self.parser))
 
 class Atom(Grammar): # A variable from Grammar G
     def Rule(self): # <Atom> ::= INT | FLOAT | LPAR <Exp> RPAR

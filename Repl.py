@@ -13,9 +13,10 @@ class Repl(Cmd):
         return False
     def emptyline(self): # Disabilita repeticao do ultimo comando
         pass
-    def do_s(self):
+    def do_s(self, inp):
         print("Samples:")
         print('    1+3*8*(1+2)')
+        print('    2^3^2')
         return False
     def default(self, inp):
         if inp == ':q':
